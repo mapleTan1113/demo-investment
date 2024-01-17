@@ -1,9 +1,11 @@
 package com.mapletan.demo.domain.order;
 
 import com.alibaba.cola.domain.Entity;
+import com.mapletan.demo.domain.order.gateway.OrderGateway;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -28,5 +30,28 @@ public class Order{
     private List<OrderDetail> decreasePositionList;
 
     private Integer orderState;
+
+    @Resource
+    private OrderGateway orderGateway;
+
+    public void create(){
+        orderGateway.create(this);
+    }
+
+    public void withdraw(){
+
+    }
+
+    public void updateState(){
+        orderGateway.updateState(this);
+    }
+
+    public void execute(){
+
+    }
+
+    public boolean riskCheck(){
+        return orderGateway.riskCheck(this);
+    }
 
 }

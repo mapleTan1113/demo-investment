@@ -1,4 +1,4 @@
-package com.mapletan.demo.config;
+package com.mapletan.demo.utils;
 
 /**
  * @author mapleTan

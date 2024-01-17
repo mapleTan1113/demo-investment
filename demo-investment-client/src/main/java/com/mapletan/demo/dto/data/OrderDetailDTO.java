@@ -1,5 +1,6 @@
 package com.mapletan.demo.dto.data;
 
+import com.alibaba.cola.dto.DTO;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
  **/
 
 @Data
-public class OrderDetailDTO {
+public class OrderDetailDTO extends DTO {
 
     private String secId;
 

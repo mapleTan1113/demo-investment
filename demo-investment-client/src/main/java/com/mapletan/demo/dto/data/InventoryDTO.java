@@ -1,5 +1,6 @@
 package com.mapletan.demo.dto.data;
 
+import com.alibaba.cola.dto.DTO;
 import lombok.Data;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  **/
 
 @Data
-public class InventoryDTO {
+public class InventoryDTO extends DTO {
 
     private String orderId;
 

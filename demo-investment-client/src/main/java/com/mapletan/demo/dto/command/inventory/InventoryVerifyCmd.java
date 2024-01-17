@@ -1,8 +1,8 @@
 package com.mapletan.demo.dto.command.inventory;
 
+import com.alibaba.cola.dto.Command;
 import com.mapletan.demo.dto.data.InventoryDTO;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,8 +13,7 @@ import javax.validation.constraints.NotNull;
  **/
 
 @Data
-@NoArgsConstructor
-public class InventoryVerifyCmd {
+public class InventoryVerifyCmd extends Command {
 
     @NotNull
     private InventoryDTO inventoryDTO;

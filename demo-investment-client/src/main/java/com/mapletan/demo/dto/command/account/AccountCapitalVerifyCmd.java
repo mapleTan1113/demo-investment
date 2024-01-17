@@ -1,5 +1,7 @@
 package com.mapletan.demo.dto.command.account;
 
+import com.alibaba.cola.dto.Command;
+import com.alibaba.cola.extension.BizScenario;
 import com.mapletan.demo.dto.data.AccountDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +14,11 @@ import lombok.NoArgsConstructor;
  **/
 
 @Data
-@NoArgsConstructor
-public class AccountVerifyCmd {
+public class AccountCapitalVerifyCmd extends Command {
 
     private AccountDTO accountDTO;
+
+//    private String biz;
+//
+//    private BizScenario bizScenario;
 }

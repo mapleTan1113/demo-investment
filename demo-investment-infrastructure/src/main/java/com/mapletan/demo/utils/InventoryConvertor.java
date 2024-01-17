@@ -1,4 +1,4 @@
-package com.mapletan.demo.config;
+package com.mapletan.demo.utils;
 
 import com.mapletan.demo.dto.data.InventoryDTO;
 import com.mapletan.demo.dto.data.OrderDTO;

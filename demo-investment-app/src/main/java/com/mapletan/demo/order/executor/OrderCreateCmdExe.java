@@ -1,8 +1,8 @@
 package com.mapletan.demo.order.executor;
 
 import com.alibaba.cola.dto.Response;
-import com.mapletan.demo.config.OrderConvertor;
-import com.mapletan.demo.domain.customer.gateway.OrderGateway;
+import com.mapletan.demo.utils.OrderConvertor;
+import com.mapletan.demo.domain.order.gateway.OrderGateway;
 import com.mapletan.demo.domain.order.Order;
 import com.mapletan.demo.dto.command.order.OrderCreateCmd;
 import com.mapletan.demo.dto.data.OrderDTO;
@@ -22,16 +22,13 @@ import javax.annotation.Resource;
 @Component
 public class OrderCreateCmdExe {
 
-    @Resource
-    private OrderGateway orderGateway;
-
     public Response execute(OrderCreateCmd cmd) {
 
         if (!paramValidaion(cmd.getOrderDTO())){
             return Response.buildFailure("参数错误","参数错误");
         }
         Order order = OrderConvertor.INSTANCE.toEntity(cmd.getOrderDTO());
-        orderGateway.create(order);
+        order.create();
         return Response.buildSuccess();
     }
 

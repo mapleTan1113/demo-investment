@@ -7,11 +7,12 @@ import lombok.Data;
 /**
  * @author mapleTan
  * @Description
- * @date 2024/01/15
+ * @date 2024/01/17
  **/
-
 @Data
-public class OrderCreateCmd extends Command {
+public class OrderRiskCheckCmd extends Command {
+
+    private String orderId;
 
     private OrderDTO orderDTO;
 }

@@ -1,4 +1,4 @@
-package com.mapletan.demo.domain.customer.gateway;
+package com.mapletan.demo.domain.order.gateway;
 
 import com.mapletan.demo.domain.order.Order;
 import com.sun.org.apache.xpath.internal.operations.Or;
@@ -10,4 +10,8 @@ import com.sun.org.apache.xpath.internal.operations.Or;
  **/
 public interface OrderGateway {
     void create(Order order);
+    boolean riskCheck(Order order);
+    Order getByUserId(String orderId);
+
+    void updateState(Order order);
 }

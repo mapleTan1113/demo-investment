@@ -1,11 +1,11 @@
-package com.mapletan.demo.config;
+package com.mapletan.demo.utils;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.eventbus.EventBus;
-import com.mapletan.demo.listener.OrderCreatedListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,10 +32,9 @@ public class GoogleGuavaCodeCacheConfig {
     }
 
     @Bean
-    public EventBus eventBusListener(OrderCreatedListener listener){
-        EventBus eventBus = new EventBus();
-        eventBus.register(listener);
-        return eventBus;
+    @Scope("singleton")
+    public EventBus createEventBus(){
+        return new EventBus();
     }
 
 }
