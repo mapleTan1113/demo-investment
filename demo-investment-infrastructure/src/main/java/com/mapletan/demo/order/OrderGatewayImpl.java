@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 
 @Component
 @Slf4j
@@ -37,17 +38,26 @@ public class OrderGatewayImpl implements OrderGateway {
     }
 
     @Override
-    public boolean riskCheck(Order order) {
+    public void riskCheck(Order order) {
         OrderRiskCheckedEvent orderRiskCheckedEvent = new OrderRiskCheckedEvent();
         orderRiskCheckedEvent.setOrderId(order.getOrderId());
         orderRiskCheckedEvent.setRiskCheckSuccess(true);
         eventBus.post(orderRiskCheckedEvent);
-        return false;
+        log.info("order RiskChecked,id:"+order.toString());
     }
 
     @Override
     public Order getByUserId(String orderId) {
-        return null;
+
+        // only for test
+        Order order = new Order();
+        order.setOrderId(orderId);
+        order.setOrderState(1);
+        order.setAccountId("");
+        order.setPortfolioId("");
+        order.setDecreasePositionList(new ArrayList<>());
+        order.setIncreasePositionList(new ArrayList<>());
+        return order;
     }
 
     @Override

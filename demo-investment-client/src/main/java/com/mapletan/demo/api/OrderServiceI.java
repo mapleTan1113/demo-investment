@@ -17,7 +17,7 @@ import com.mapletan.demo.dto.query.order.OrderByIdQry;
 public interface OrderServiceI {
     Response submitOrder(OrderCreateCmd cmd);
 
-    boolean riskCheck(OrderRiskCheckCmd cmd);
+    void riskCheck(OrderRiskCheckCmd cmd);
 
     void updateState(OrderStateUpdateCmd cmd);
 

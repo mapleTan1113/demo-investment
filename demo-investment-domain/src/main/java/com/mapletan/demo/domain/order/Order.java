@@ -31,10 +31,7 @@ public class Order{
 
     private Integer orderState;
 
-    @Resource
-    private OrderGateway orderGateway;
-
-    public void create(){
+    public void create(OrderGateway orderGateway){
         orderGateway.create(this);
     }
 
@@ -42,7 +39,7 @@ public class Order{
 
     }
 
-    public void updateState(){
+    public void updateState(OrderGateway orderGateway){
         orderGateway.updateState(this);
     }
 
@@ -50,8 +47,8 @@ public class Order{
 
     }
 
-    public boolean riskCheck(){
-        return orderGateway.riskCheck(this);
+    public void riskCheck(OrderGateway orderGateway){
+        orderGateway.riskCheck(this);
     }
 
 }

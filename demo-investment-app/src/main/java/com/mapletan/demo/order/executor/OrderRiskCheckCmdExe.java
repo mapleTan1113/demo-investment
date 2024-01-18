@@ -1,10 +1,12 @@
 package com.mapletan.demo.order.executor;
 
-import com.alibaba.cola.dto.Response;
 import com.mapletan.demo.domain.order.Order;
+import com.mapletan.demo.domain.order.gateway.OrderGateway;
 import com.mapletan.demo.dto.command.order.OrderRiskCheckCmd;
 import com.mapletan.demo.utils.OrderConvertor;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * @author mapleTan
@@ -15,8 +17,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderRiskCheckCmdExe {
 
-    public boolean execute(OrderRiskCheckCmd cmd) {
+    @Resource
+    OrderGateway orderGateway;
+
+    public void execute(OrderRiskCheckCmd cmd) {
         Order order = OrderConvertor.INSTANCE.toEntity(cmd.getOrderDTO());
-        return order.riskCheck();
+        order.riskCheck(orderGateway);
     }
 }

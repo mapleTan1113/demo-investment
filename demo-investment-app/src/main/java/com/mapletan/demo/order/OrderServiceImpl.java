@@ -39,15 +39,16 @@ public class OrderServiceImpl implements OrderServiceI {
 
     @Override
     public Response submitOrder(OrderCreateCmd cmd) {
-        return orderCreateCmdExe.execute(cmd);
+        Response execute = orderCreateCmdExe.execute(cmd);
+        return execute;
     }
 
     @Override
-    public boolean riskCheck(OrderRiskCheckCmd cmd) {
+    public void riskCheck(OrderRiskCheckCmd cmd) {
         OrderByIdQry orderByIdQry = new OrderByIdQry();
         SingleResponse<OrderDTO> response = getByOrderId(orderByIdQry);
         cmd.setOrderDTO(response.getData());
-        return orderRiskCheckCmdExe.execute(cmd);
+        orderRiskCheckCmdExe.execute(cmd);
     }
 
     @Override

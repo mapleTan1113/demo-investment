@@ -4,7 +4,6 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.mapletan.demo.api.OrderServiceI;
 import com.mapletan.demo.dto.command.order.OrderStateUpdateCmd;
-import com.mapletan.demo.dto.event.OrderCreatedEvent;
 import com.mapletan.demo.dto.event.OrderRiskCheckedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

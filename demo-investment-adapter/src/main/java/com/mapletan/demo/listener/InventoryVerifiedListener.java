@@ -51,8 +51,7 @@ public class InventoryVerifiedListener {
 
         OrderRiskCheckCmd orderRiskCheckCmd = new OrderRiskCheckCmd();
         orderRiskCheckCmd.setOrderId(event.getOrderId());
-        boolean b = orderService.riskCheck(orderRiskCheckCmd);
-
+        orderService.riskCheck(orderRiskCheckCmd);
     }
 
 }
