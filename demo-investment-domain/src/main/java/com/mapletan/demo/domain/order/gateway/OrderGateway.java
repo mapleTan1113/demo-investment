@@ -10,7 +10,7 @@ import com.mapletan.demo.domain.order.Order;
 public interface OrderGateway {
     void create(Order order);
     void riskCheck(Order order);
-    Order getByUserId(String orderId);
-
-    void updateState(Order order);
+    Order getByOrderId(String orderId);
+    void trade(Order order);
+    void update(Order order);
 }

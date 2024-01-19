@@ -4,6 +4,8 @@ import com.alibaba.cola.dto.Command;
 import com.mapletan.demo.dto.data.OrderDTO;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author mapleTan
  * @Description
@@ -13,5 +15,6 @@ import lombok.Data;
 @Data
 public class OrderCreateCmd extends Command {
 
+    @NotNull
     private OrderDTO orderDTO;
 }

@@ -6,16 +6,13 @@ package com.mapletan.demo.order;
 import com.alibaba.cola.catchlog.CatchAndLog;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.cola.dto.SingleResponse;
+import com.google.common.eventbus.EventBus;
 import com.mapletan.demo.api.OrderServiceI;
-import com.mapletan.demo.dto.command.order.OrderStateUpdateCmd;
-import com.mapletan.demo.order.executor.OrderStateUpdateCmdExe;
+import com.mapletan.demo.dto.command.order.*;
+import com.mapletan.demo.order.executor.*;
 import com.mapletan.demo.order.executor.query.OrderByIdQryExe;
-import com.mapletan.demo.dto.command.order.OrderCreateCmd;
-import com.mapletan.demo.dto.command.order.OrderRiskCheckCmd;
 import com.mapletan.demo.dto.data.OrderDTO;
 import com.mapletan.demo.dto.query.order.OrderByIdQry;
-import com.mapletan.demo.order.executor.OrderCreateCmdExe;
-import com.mapletan.demo.order.executor.OrderRiskCheckCmdExe;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,16 +33,22 @@ public class OrderServiceImpl implements OrderServiceI {
     @Resource
     private OrderStateUpdateCmdExe orderStateUpdateCmdExe;
 
+    @Resource
+    private OrderTradeCmdExe orderTradeCmdExe;
+
+    @Resource
+    private TradeResultRecordCmdExe tradeResultRecordCmdExe;
+
 
     @Override
     public Response submitOrder(OrderCreateCmd cmd) {
-        Response execute = orderCreateCmdExe.execute(cmd);
-        return execute;
+        return orderCreateCmdExe.execute(cmd);
     }
 
     @Override
     public void riskCheck(OrderRiskCheckCmd cmd) {
         OrderByIdQry orderByIdQry = new OrderByIdQry();
+        orderByIdQry.setOrderId(cmd.getOrderId());
         SingleResponse<OrderDTO> response = getByOrderId(orderByIdQry);
         cmd.setOrderDTO(response.getData());
         orderRiskCheckCmdExe.execute(cmd);
@@ -57,7 +60,28 @@ public class OrderServiceImpl implements OrderServiceI {
     }
 
     @Override
+    public void recordTradeResult(TradeResultRecordCmd cmd) {
+
+        OrderStateUpdateCmd orderStateUpdateCmd = new OrderStateUpdateCmd();
+        orderStateUpdateCmd.setOrderId(cmd.getOrderId());
+        orderStateUpdateCmd.setOrderState(cmd.getOrderState());
+        orderStateUpdateCmdExe.execute(orderStateUpdateCmd);
+
+        OrderByIdQry orderByIdQry = new OrderByIdQry();
+        orderByIdQry.setOrderId(cmd.getOrderId());
+        SingleResponse<OrderDTO> response = getByOrderId(orderByIdQry);
+        tradeResultRecordCmdExe.execute(response.getData());
+    }
+
+    @Override
     public SingleResponse<OrderDTO> getByOrderId(OrderByIdQry orderByIdQry) {
         return orderByIdQryExe.execute(orderByIdQry);
+    }
+
+    @Override
+    public Response tradeOrder(OrderTradeCmd cmd) {
+        OrderByIdQry orderByIdQry = new OrderByIdQry();
+        SingleResponse<OrderDTO> response = getByOrderId(orderByIdQry);
+        return orderTradeCmdExe.execute(response.getData());
     }
 }

@@ -1,6 +1,5 @@
 package com.mapletan.demo.dto.event;
 
-import com.mapletan.demo.dto.data.OrderDTO;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -8,12 +7,15 @@ import javax.validation.constraints.NotNull;
 /**
  * @author mapleTan
  * @Description
- * @date 2024/01/17
+ * @date 2024/01/19
  **/
+
 @Data
-public class TradeResultRecordedEvent extends AbstractEvent{
+public class TradeResultRespondedEvent extends AbstractEvent{
 
     @NotNull
-    private OrderDTO orderDTO;
+    private String orderId;
 
+    @NotNull
+    private boolean tradeResultSuccess;
 }

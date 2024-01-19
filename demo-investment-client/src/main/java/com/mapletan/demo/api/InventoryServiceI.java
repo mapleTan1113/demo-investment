@@ -1,5 +1,6 @@
 package com.mapletan.demo.api;
 
+import com.mapletan.demo.dto.command.inventory.InventoryUpdateCmd;
 import com.mapletan.demo.dto.command.inventory.InventoryVerifyCmd;
 
 /**
@@ -10,4 +11,6 @@ import com.mapletan.demo.dto.command.inventory.InventoryVerifyCmd;
 public interface InventoryServiceI {
 
     boolean securityInventoryVerify(InventoryVerifyCmd cmd);
+
+    void updateInventory(InventoryUpdateCmd cmd);
 }

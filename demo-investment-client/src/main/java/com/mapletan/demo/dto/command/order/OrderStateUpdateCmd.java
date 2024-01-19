@@ -3,6 +3,8 @@ package com.mapletan.demo.dto.command.order;
 import com.alibaba.cola.dto.Command;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author mapleTan
  * @Description
@@ -11,7 +13,9 @@ import lombok.Data;
 @Data
 public class OrderStateUpdateCmd extends Command {
 
+    @NotNull
     private String orderId;
 
+    @NotNull
     private Integer orderState;
 }

@@ -1,5 +1,6 @@
 package com.mapletan.demo.api;
 
+import com.mapletan.demo.dto.command.account.AccountCapitalUpdateCmd;
 import com.mapletan.demo.dto.command.account.AccountCapitalVerifyCmd;
 
 /**
@@ -9,4 +10,6 @@ import com.mapletan.demo.dto.command.account.AccountCapitalVerifyCmd;
  **/
 public interface AccountServiceI {
     boolean capitalVerify(AccountCapitalVerifyCmd cmd);
+
+    void updateCapital(AccountCapitalUpdateCmd cmd);
 }

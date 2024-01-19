@@ -1,6 +1,6 @@
-package com.mapletan.demo.dto.query.order;
+package com.mapletan.demo.dto.command.order;
 
-import com.alibaba.cola.dto.Query;
+import com.alibaba.cola.dto.Command;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -10,10 +10,10 @@ import javax.validation.constraints.NotNull;
  * @Description
  * @date 2024/01/17
  **/
-
 @Data
-public class OrderByIdQry extends Query {
+public class OrderTradeCmd extends Command {
 
     @NotNull
     private String orderId;
+
 }

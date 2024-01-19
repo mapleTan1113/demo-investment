@@ -40,18 +40,23 @@ public class InventoryVerifiedListener {
         log.info(event.toString());
         OrderStateUpdateCmd orderStateUpdateCmd = new OrderStateUpdateCmd();
         orderStateUpdateCmd.setOrderId(event.getOrderId());
-        if(!event.isInventoryVerifySuccess()){
-            // 更新状态为失败
-            orderStateUpdateCmd.setOrderState(-1);
-            orderService.updateState(orderStateUpdateCmd);
-            return;
-        }
-        orderStateUpdateCmd.setOrderState(1);
-        orderService.updateState(orderStateUpdateCmd);
+        if (policy(event, orderStateUpdateCmd)) return;
 
         OrderRiskCheckCmd orderRiskCheckCmd = new OrderRiskCheckCmd();
         orderRiskCheckCmd.setOrderId(event.getOrderId());
         orderService.riskCheck(orderRiskCheckCmd);
+    }
+
+    private boolean policy(InventoryVerifiedEvent event, OrderStateUpdateCmd orderStateUpdateCmd) {
+        if(!event.isInventoryVerifySuccess()){
+            // 更新状态为失败
+            orderStateUpdateCmd.setOrderState(-1);
+            orderService.updateState(orderStateUpdateCmd);
+            return true;
+        }
+        orderStateUpdateCmd.setOrderState(1);
+        orderService.updateState(orderStateUpdateCmd);
+        return false;
     }
 
 }

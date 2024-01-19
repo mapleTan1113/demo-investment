@@ -1,6 +1,7 @@
 package com.mapletan.demo.dto.event;
 
 import com.mapletan.demo.dto.data.OrderDTO;
+import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,7 +10,9 @@ import javax.validation.constraints.NotNull;
  * @Description
  * @date 2024/01/17
  **/
-public class OrderExecutedEvent extends AbstractEvent{
+
+@Data
+public class OrderTradeRequestedEvent extends AbstractEvent{
 
     @NotNull
     private OrderDTO orderDTO;

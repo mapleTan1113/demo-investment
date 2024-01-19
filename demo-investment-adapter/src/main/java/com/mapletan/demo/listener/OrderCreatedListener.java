@@ -60,7 +60,6 @@ public class OrderCreatedListener {
 //        Boolean executeResult = verifyCapitalInventoryInTransaction(accountVerifyCmd, inventoryVerifyCmd);
         Boolean result = verifyCapitalInventoryNormally(accountVerifyCmd, inventoryVerifyCmd);
 
-
         // 这段代码里验资验券放到一个事务里同步执行，所以post后执行的验券event就行
         // 如果是异步事件总线的话要对event做持久化，要设置policy去查event的执行结果，会复杂很多
         AccountCapitalVerifiedEvent accountCapitalVerifiedEvent = new AccountCapitalVerifiedEvent();

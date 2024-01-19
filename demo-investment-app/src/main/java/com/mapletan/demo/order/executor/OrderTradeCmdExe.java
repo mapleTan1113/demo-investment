@@ -1,9 +1,10 @@
 package com.mapletan.demo.order.executor;
 
-import com.alibaba.cola.domain.DomainFactory;
+import com.alibaba.cola.dto.Response;
 import com.mapletan.demo.domain.order.Order;
 import com.mapletan.demo.domain.order.gateway.OrderGateway;
-import com.mapletan.demo.dto.command.order.OrderStateUpdateCmd;
+import com.mapletan.demo.dto.command.order.OrderTradeCmd;
+import com.mapletan.demo.dto.data.OrderDTO;
 import com.mapletan.demo.utils.OrderConvertor;
 import org.springframework.stereotype.Component;
 
@@ -12,19 +13,18 @@ import javax.annotation.Resource;
 /**
  * @author mapleTan
  * @Description
- * @date 2024/01/17
+ * @date 2024/01/18
  **/
-
 @Component
-public class OrderStateUpdateCmdExe {
+public class OrderTradeCmdExe {
 
     @Resource
     private OrderGateway orderGateway;
 
-    public void execute(OrderStateUpdateCmd cmd) {
-        Order order = new Order();
-        order.setOrderId(cmd.getOrderId());
-        order.setOrderState(cmd.getOrderState());
+    public Response execute(OrderDTO orderDTO) {
+        Order order = OrderConvertor.INSTANCE.toEntity(orderDTO);
+        order.trade(orderGateway);
         order.updateState(orderGateway);
+        return Response.buildSuccess();
     }
 }

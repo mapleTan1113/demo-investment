@@ -3,6 +3,7 @@ package com.mapletan.demo.order;
 import com.google.common.eventbus.EventBus;
 import com.mapletan.demo.dto.event.OrderRiskCheckedEvent;
 import com.mapletan.demo.dto.event.OrderStateUpdatedEvent;
+import com.mapletan.demo.dto.event.OrderTradeRequestedEvent;
 import com.mapletan.demo.utils.OrderConvertor;
 import com.mapletan.demo.domain.order.gateway.OrderGateway;
 import com.mapletan.demo.domain.order.Order;
@@ -39,6 +40,8 @@ public class OrderGatewayImpl implements OrderGateway {
 
     @Override
     public void riskCheck(Order order) {
+        // 这里应该是风控校验的方法实现，略
+        //
         OrderRiskCheckedEvent orderRiskCheckedEvent = new OrderRiskCheckedEvent();
         orderRiskCheckedEvent.setOrderId(order.getOrderId());
         orderRiskCheckedEvent.setRiskCheckSuccess(true);
@@ -47,7 +50,7 @@ public class OrderGatewayImpl implements OrderGateway {
     }
 
     @Override
-    public Order getByUserId(String orderId) {
+    public Order getByOrderId(String orderId) {
 
         // only for test
         Order order = new Order();
@@ -61,9 +64,21 @@ public class OrderGatewayImpl implements OrderGateway {
     }
 
     @Override
-    public void updateState(Order order) {
-        // mapper.update
+    public void trade(Order order) {
+        // send trade
+        OrderTradeRequestedEvent orderTradeRequestedEvent = new OrderTradeRequestedEvent();
+//        orderTradeRequestedEvent.setOrderDTO(OrderConvertor.INSTANCE.toDTO(order));
+        orderTradeRequestedEvent.setOrderDTO(new OrderDTO());
+        eventBus.post(orderTradeRequestedEvent);
+        log.info("order orderTradeRequested,id:"+order.toString());
 
+    }
+
+    @Override
+    public void update(Order order) {
+        // mapper.update
+//        orderMapper.update(order);
+        log.info("order update! "+ order.toString());
         //
         OrderStateUpdatedEvent orderStateUpdatedEvent = new OrderStateUpdatedEvent();
     }

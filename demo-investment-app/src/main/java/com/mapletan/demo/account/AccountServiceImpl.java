@@ -2,6 +2,7 @@ package com.mapletan.demo.account;
 
 import com.alibaba.cola.catchlog.CatchAndLog;
 import com.mapletan.demo.api.AccountServiceI;
+import com.mapletan.demo.dto.command.account.AccountCapitalUpdateCmd;
 import com.mapletan.demo.dto.command.account.AccountCapitalVerifyCmd;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,10 @@ public class AccountServiceImpl implements AccountServiceI {
     public boolean capitalVerify(AccountCapitalVerifyCmd cmd) {
         log.info("capitalVerify success");
         return true;
+    }
+
+    @Override
+    public void updateCapital(AccountCapitalUpdateCmd cmd) {
+
     }
 }

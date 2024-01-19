@@ -1,14 +1,13 @@
 package com.mapletan.demo.order.executor;
 
-import com.alibaba.cola.domain.DomainFactory;
 import com.alibaba.cola.dto.Response;
 import com.mapletan.demo.utils.OrderConvertor;
 import com.mapletan.demo.domain.order.gateway.OrderGateway;
 import com.mapletan.demo.domain.order.Order;
 import com.mapletan.demo.dto.command.order.OrderCreateCmd;
 import com.mapletan.demo.dto.data.OrderDTO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 
@@ -29,7 +28,7 @@ public class OrderCreateCmdExe {
 
     public Response execute(OrderCreateCmd cmd) {
 
-        if (!paramValidaion(cmd.getOrderDTO())){
+        if (emptyParamValidation(cmd.getOrderDTO())){
             return Response.buildFailure("参数错误","参数错误");
         }
         Order order = OrderConvertor.INSTANCE.toEntity(cmd.getOrderDTO());
@@ -37,7 +36,8 @@ public class OrderCreateCmdExe {
         return Response.buildSuccess();
     }
 
-    private boolean paramValidaion(OrderDTO orderDTO){
-        return true;
+    private boolean emptyParamValidation(OrderDTO orderDTO){
+        return CollectionUtils.isEmpty(orderDTO.getIncreasePositionList())
+                &&CollectionUtils.isEmpty(orderDTO.getDecreasePositionList());
     }
 }

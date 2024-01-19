@@ -5,7 +5,6 @@ import com.mapletan.demo.domain.order.gateway.OrderGateway;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -39,16 +38,16 @@ public class Order{
 
     }
 
-    public void updateState(OrderGateway orderGateway){
-        orderGateway.updateState(this);
-    }
-
-    public void execute(){
-
-    }
-
     public void riskCheck(OrderGateway orderGateway){
         orderGateway.riskCheck(this);
+    }
+
+    public void updateState(OrderGateway orderGateway){
+        orderGateway.update(this);
+    }
+
+    public void trade(OrderGateway orderGateway){
+        orderGateway.trade(this);
     }
 
 }
