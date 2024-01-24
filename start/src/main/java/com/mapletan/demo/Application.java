@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(scanBasePackages = {"com.mapletan.demo", "com.alibaba.cola"})
 @Configurable
+@MapperScan("com.mapletan.demo.database")
 public class Application {
 
     public static void main(String[] args) {

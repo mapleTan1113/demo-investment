@@ -1,6 +1,7 @@
 package com.mapletan.demo.domain.inventory;
 
 import com.alibaba.cola.domain.Entity;
+import com.mapletan.demo.domain.BaseDO;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
  **/
 @Data
 @Entity
-public class Inventory {
+public class Inventory extends BaseDO {
 
     private String portfolioId;
 

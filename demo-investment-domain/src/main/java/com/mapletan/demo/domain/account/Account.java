@@ -1,7 +1,9 @@
 package com.mapletan.demo.domain.account;
 
 import com.alibaba.cola.domain.Entity;
+import com.mapletan.demo.domain.BaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 
@@ -12,7 +14,8 @@ import java.math.BigDecimal;
  **/
 @Data
 @Entity
-public class Account {
+@EqualsAndHashCode(callSuper = false)
+public class Account extends BaseDO {
 
     private String accountId;
 

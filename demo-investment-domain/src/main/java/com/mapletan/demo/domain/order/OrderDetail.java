@@ -1,7 +1,9 @@
 package com.mapletan.demo.domain.order;
 
 import com.alibaba.cola.domain.Entity;
+import com.mapletan.demo.domain.BaseDO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -15,7 +17,9 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @Entity
-public class OrderDetail {
+public class OrderDetail extends BaseDO {
+
+    private String orderId;
 
     private String secId;
 

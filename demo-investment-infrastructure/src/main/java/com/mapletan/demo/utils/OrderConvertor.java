@@ -1,5 +1,6 @@
 package com.mapletan.demo.utils;
 
+import com.mapletan.demo.database.dataobject.OrderDO;
 import com.mapletan.demo.domain.order.Order;
 import com.mapletan.demo.dto.data.OrderDTO;
 import org.mapstruct.Mapper;
@@ -18,6 +19,8 @@ public interface OrderConvertor {
     OrderDTO toDTO(Order order);
 
     Order toEntity(OrderDTO orderDTO);
+
+    OrderDO toDO(Order order);
 
 
 }

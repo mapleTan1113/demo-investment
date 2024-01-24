@@ -1,6 +1,10 @@
-package com.mapletan.demo.order;
+package com.mapletan.demo.database.gatewayimpl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.eventbus.EventBus;
+import com.mapletan.demo.database.OrderDetailMapper;
+import com.mapletan.demo.database.OrderMapper;
+import com.mapletan.demo.database.dataobject.OrderDO;
 import com.mapletan.demo.dto.event.OrderRiskCheckedEvent;
 import com.mapletan.demo.dto.event.OrderStateUpdatedEvent;
 import com.mapletan.demo.dto.event.OrderTradeRequestedEvent;
@@ -9,6 +13,7 @@ import com.mapletan.demo.domain.order.gateway.OrderGateway;
 import com.mapletan.demo.domain.order.Order;
 import com.mapletan.demo.dto.data.OrderDTO;
 import com.mapletan.demo.dto.event.OrderCreatedEvent;
+import com.mapletan.demo.utils.mp.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -17,20 +22,18 @@ import java.util.ArrayList;
 
 @Component
 @Slf4j
-public class OrderGatewayImpl implements OrderGateway {
+public class OrderGatewayImpl extends ServiceImpl<OrderMapper, OrderDO> implements OrderGateway, OrderService {
 
-//    @Resource
-//    private OrderMapper orderMapper;
-//
-//    @Resource
-//    private OrderDetailMapper orderDetailMapper;
+    @Resource
+    private OrderMapper orderMapper;
 
     @Resource
     private EventBus eventBus;
 
     @Override
     public void create(Order order) {
-//        orderMapper.save(order);
+        OrderDO orderDO = OrderConvertor.INSTANCE.toDO(order);
+        orderMapper.insert(orderDO);
         OrderCreatedEvent orderCreatedEvent = new OrderCreatedEvent();
         OrderDTO orderDTO = OrderConvertor.INSTANCE.toDTO(order);
         orderCreatedEvent.setOrderDTO(orderDTO);

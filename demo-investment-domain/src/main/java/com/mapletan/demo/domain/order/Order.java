@@ -1,8 +1,10 @@
 package com.mapletan.demo.domain.order;
 
 import com.alibaba.cola.domain.Entity;
+import com.mapletan.demo.domain.BaseDO;
 import com.mapletan.demo.domain.order.gateway.OrderGateway;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -16,7 +18,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
-public class Order{
+@EqualsAndHashCode(callSuper = false)
+public class Order extends BaseDO {
 
     private String orderId;
 

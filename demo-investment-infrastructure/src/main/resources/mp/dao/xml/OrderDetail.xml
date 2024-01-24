@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapletan.demo.database.OrderDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mapletan.demo.database.dataobject.OrderDetailDO">
+        <id column="id" property="id" />
+        <result column="order_id" property="orderId" />
+        <result column="sec_id" property="secId" />
+        <result column="company_name" property="companyName" />
+        <result column="direction" property="direction" />
+        <result column="quantity" property="quantity" />
+        <result column="price" property="price" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, order_id, sec_id, company_name, direction, quantity, price, create_time, update_time
+    </sql>
+
+</mapper>
