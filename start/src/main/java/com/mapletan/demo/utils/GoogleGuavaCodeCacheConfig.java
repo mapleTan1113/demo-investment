@@ -3,6 +3,7 @@ package com.mapletan.demo.utils;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.eventbus.EventBus;
+import com.mapletan.demo.common.TimestampOrderedEventBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -34,7 +35,12 @@ public class GoogleGuavaCodeCacheConfig {
     @Bean
     @Scope("singleton")
     public EventBus createEventBus(){
-        return new EventBus();
+        return new TimestampOrderedEventBus();
     }
 
+//    @Bean
+//    @Scope("singleton")
+//    public TimestampOrderedEventBus createTimestampOrderedEventBus(){
+//        return new TimestampOrderedEventBus();
+//    }
 }

@@ -34,6 +34,7 @@ public class Order extends BaseDO {
     private Integer orderState;
 
     public void create(OrderGateway orderGateway){
+        this.setOrderState(OrderState.CREATED.getCode());
         orderGateway.create(this);
     }
 

@@ -22,4 +22,8 @@ public abstract class AbstractEvent {
     public void setTimestamp() {
         this.timestamp = Instant.now();
     }
+
+    public AbstractEvent(){
+        this.timestamp=Instant.now();
+    }
 }
