@@ -15,7 +15,8 @@ public enum OrderState {
     VERIFIED(1,"订单已验资验券,风控中"),
     RISKCHECKED(2,"订单已风控,可交易"),
     TRADED(3,"订单已交易,等待交易回报中"),
-    RECORDED(4,"交易回报已登记,更新持仓与资金数据中"),
+    // TODO:是否有必要分三个状态 RECORDED跟SUCCESS跟FAIL三个状态
+//    RECORDED(4,"交易回报已登记,更新持仓与资金数据中"),
     SUCCESS(5,"成功"),
     FAIL(-1,"失败");
 
@@ -29,5 +30,11 @@ public enum OrderState {
         this.state=state;
     }
 
+    public static OrderState convertTradeResultToState(boolean tradeResultSuccess){
+        if(tradeResultSuccess) return OrderState.SUCCESS;
+
+        return OrderState.FAIL;
+
+    }
 
 }

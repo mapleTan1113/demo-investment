@@ -3,6 +3,7 @@ package com.mapletan.demo.listener;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.mapletan.demo.api.OrderServiceI;
+import com.mapletan.demo.domain.order.OrderState;
 import com.mapletan.demo.dto.command.order.OrderStateUpdateCmd;
 import com.mapletan.demo.dto.event.OrderRiskCheckedEvent;
 import lombok.extern.slf4j.Slf4j;
@@ -40,11 +41,11 @@ public class OrderRiskCheckedListener {
         orderStateUpdateCmd.setOrderId(event.getOrderId());
         if(!event.isRiskCheckSuccess()){
             // 更新状态为失败
-            orderStateUpdateCmd.setOrderState(-1);
+            orderStateUpdateCmd.setOrderState(OrderState.FAIL.getCode());
             orderService.updateState(orderStateUpdateCmd);
             return;
         }
-        orderStateUpdateCmd.setOrderState(1);
+        orderStateUpdateCmd.setOrderState(OrderState.RISKCHECKED.getCode());
         orderService.updateState(orderStateUpdateCmd);
 
     }

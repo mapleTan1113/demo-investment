@@ -1,5 +1,6 @@
 package com.mapletan.demo.database.gatewayimpl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.eventbus.EventBus;
 import com.mapletan.demo.database.OrderMapper;
@@ -78,10 +79,12 @@ public class OrderGatewayImpl extends ServiceImpl<OrderMapper, OrderDO> implemen
 
     @Override
     public void update(Order order) {
-        // mapper.update
-//        orderMapper.update(order);
+        OrderDO orderDO = OrderConvertor.INSTANCE.toDO(order);
+
+        final UpdateWrapper<OrderDO> wrapper = new UpdateWrapper<>();
+        wrapper.eq("order_id",orderDO.getOrderId());
+        orderMapper.update(orderDO,wrapper);
         log.info("order update! "+ order.toString());
-        //
         OrderStateUpdatedEvent orderStateUpdatedEvent = new OrderStateUpdatedEvent();
     }
 }

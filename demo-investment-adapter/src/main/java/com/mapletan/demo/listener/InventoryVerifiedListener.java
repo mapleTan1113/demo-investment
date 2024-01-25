@@ -3,6 +3,7 @@ package com.mapletan.demo.listener;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.mapletan.demo.api.OrderServiceI;
+import com.mapletan.demo.domain.order.OrderState;
 import com.mapletan.demo.dto.command.order.OrderRiskCheckCmd;
 import com.mapletan.demo.dto.command.order.OrderStateUpdateCmd;
 import com.mapletan.demo.dto.event.InventoryVerifiedEvent;
@@ -40,7 +41,7 @@ public class InventoryVerifiedListener {
         log.info(event.toString());
         OrderStateUpdateCmd orderStateUpdateCmd = new OrderStateUpdateCmd();
         orderStateUpdateCmd.setOrderId(event.getOrderId());
-        if (policy(event, orderStateUpdateCmd)) return;
+        if (!policy(event, orderStateUpdateCmd)) return;
 
         OrderRiskCheckCmd orderRiskCheckCmd = new OrderRiskCheckCmd();
         orderRiskCheckCmd.setOrderId(event.getOrderId());
@@ -50,13 +51,13 @@ public class InventoryVerifiedListener {
     private boolean policy(InventoryVerifiedEvent event, OrderStateUpdateCmd orderStateUpdateCmd) {
         if(!event.isInventoryVerifySuccess()){
             // 更新状态为失败
-            orderStateUpdateCmd.setOrderState(-1);
+            orderStateUpdateCmd.setOrderState(OrderState.FAIL.getCode());
             orderService.updateState(orderStateUpdateCmd);
-            return true;
+            return false;
         }
-        orderStateUpdateCmd.setOrderState(1);
+        orderStateUpdateCmd.setOrderState(OrderState.VERIFIED.getCode());
         orderService.updateState(orderStateUpdateCmd);
-        return false;
+        return true;
     }
 
 }

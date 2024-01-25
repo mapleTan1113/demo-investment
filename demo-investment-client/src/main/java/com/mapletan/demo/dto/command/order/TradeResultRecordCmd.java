@@ -19,11 +19,4 @@ public class TradeResultRecordCmd extends Command {
     @NotNull
     private Integer orderState;
 
-    public void trans(boolean tradeResultSuccess){
-        if(tradeResultSuccess){
-            this.orderState=1;
-        }else{
-            this.orderState=-1;
-        }
-    }
 }

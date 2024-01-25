@@ -26,7 +26,6 @@ public class TradeResultRecordCmdExe {
 
     public void execute(OrderDTO orderDTO){
 
-
         TradeResultRecordedEvent event = new TradeResultRecordedEvent();
         event.setOrderDTO(orderDTO);
         eventBus.post(event);
