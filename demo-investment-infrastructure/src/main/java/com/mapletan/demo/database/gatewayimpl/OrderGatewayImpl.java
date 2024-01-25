@@ -2,7 +2,6 @@ package com.mapletan.demo.database.gatewayimpl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.eventbus.EventBus;
-import com.mapletan.demo.database.OrderDetailMapper;
 import com.mapletan.demo.database.OrderMapper;
 import com.mapletan.demo.database.dataobject.OrderDO;
 import com.mapletan.demo.dto.event.OrderRiskCheckedEvent;

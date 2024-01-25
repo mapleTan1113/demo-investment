@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -35,12 +37,8 @@ public class GoogleGuavaCodeCacheConfig {
     @Bean
     @Scope("singleton")
     public EventBus createEventBus(){
-        return new TimestampOrderedEventBus();
+        Executor executor= Executors.newFixedThreadPool(10);
+        return new TimestampOrderedEventBus(executor);
     }
 
-//    @Bean
-//    @Scope("singleton")
-//    public TimestampOrderedEventBus createTimestampOrderedEventBus(){
-//        return new TimestampOrderedEventBus();
-//    }
 }
