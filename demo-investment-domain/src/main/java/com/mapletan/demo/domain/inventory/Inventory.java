@@ -2,6 +2,7 @@ package com.mapletan.demo.domain.inventory;
 
 import com.alibaba.cola.domain.Entity;
 import com.mapletan.demo.domain.BaseDO;
+import com.mapletan.demo.domain.inventory.gateway.InventoryGateway;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -25,11 +26,14 @@ public class Inventory extends BaseDO {
 
     private BigDecimal costPrice;
 
-    public void frozenInventory(){
-
+    public boolean freezeInventory(InventoryGateway gateway){
+//        return gateway.freezeInventory(this);
+        return false;
     }
 
-    public void updateInventory(){
-
+    public boolean updateInventory(InventoryGateway gateway){
+        return gateway.updateInventory(this);
     }
+
+
 }
